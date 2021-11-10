@@ -56,9 +56,8 @@ struct Cannons {
 
 struct HP {
     HP() {}
-  HP(int maxHP) : max(maxHP) {}
-  HP(int currentHPValue, int maxHP)
-      : currentValue(currentHPValue), max(maxHP) {}
+  HP(int currentHPValue)
+      : currentValue(currentHPValue) {}
 
   int currentValue{};
   int max{100};

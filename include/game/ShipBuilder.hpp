@@ -1,17 +1,20 @@
 #pragma once 
+
 #include "Ship.hpp"
 
+#include <memory>
+class ShipInterface;
+
 class ShipBuilder {
-    Ship ship_;
+    std::shared_ptr<ShipInterface> ship_;
     
     public:
-    ShipBuilder() = default;
-    
-    operator Ship() const {
+    ShipBuilder(ShipInterface* shipInterface) : ship_{shipInterface} {} 
+
+    std::shared_ptr<ShipInterface> get() {
         return std::move(ship_);
     }
-
-    ShipBuilder& addFactorySettings();
+    
     ShipBuilder& setShipType(const std::string&);
     ShipBuilder& setSpeed(const Speed&);
     ShipBuilder& setTurning(const Turning&);
@@ -20,8 +23,6 @@ class ShipBuilder {
     ShipBuilder& setMaxCannons(const Cannons&);
     ShipBuilder& setUpkeep(const Upkeep&);
     ShipBuilder& setCost(const Cost&);
-
-    ShipBuilder& addOwnSettings();
     ShipBuilder& setName(const std::string&);
     ShipBuilder& setCrew(const Crew&);
     ShipBuilder& setCapacity(const Capacity&);
